@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/EShop.API/EShop.API.csproj" />
+    <Project Path="backend/EShop.Core/EShop.Core.csproj" />
+    <Project Path="backend/EShop.Infrastructure/EShop.Infrastructure.csproj" />
+    <Project Path="backend/EShop.Tests/EShop.Tests.csproj" />
+  </Folder>
+</Solution>
