@@ -14,16 +14,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ECommerce-Shop\\backend\\EShop.Core\\EShop.Core.csproj",
+      "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj",
       "projectName": "EShop.Core",
-      "projectPath": "C:\\Users\\H826422\\source\\repos\\ECommerce-Shop\\backend\\EShop.Core\\EShop.Core.csproj",
+      "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj",
       "packagesPath": "C:\\Users\\H826422\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\H826422\\source\\repos\\ECommerce-Shop\\backend\\EShop.Core\\obj\\",
+      "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+        "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\NuGet.Config",
         "C:\\Users\\H826422\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -32,10 +33,8 @@
         "net10.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://hqv-robotics.pkgs.visualstudio.com/_packaging/ToolsNuGet/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net10.0": {

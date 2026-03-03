@@ -17,6 +17,7 @@
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+          "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\NuGet.Config",
           "C:\\Users\\H826422\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -25,20 +26,18 @@
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://hqv-robotics.pkgs.visualstudio.com/_packaging/ToolsNuGet/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj": {
-                "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj"
+              "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj": {
+                "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj"
               },
-              "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj"
+              "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj"
               }
             }
           }
@@ -66,6 +65,12 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.0, )"
             },
             "Stripe.net": {
               "target": "Package",
@@ -513,19 +518,20 @@
         }
       }
     },
-    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj": {
+    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj",
+        "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj",
         "projectName": "EShop.Core",
-        "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj",
+        "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj",
         "packagesPath": "C:\\Users\\H826422\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\obj\\",
+        "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+          "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\NuGet.Config",
           "C:\\Users\\H826422\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -534,10 +540,8 @@
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://hqv-robotics.pkgs.visualstudio.com/_packaging/ToolsNuGet/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
@@ -854,19 +858,20 @@
         }
       }
     },
-    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj": {
+    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj",
         "projectName": "EShop.Infrastructure",
-        "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\H826422\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+          "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\NuGet.Config",
           "C:\\Users\\H826422\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -875,17 +880,15 @@
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://hqv-robotics.pkgs.visualstudio.com/_packaging/ToolsNuGet/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj": {
-                "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj"
+              "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj": {
+                "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj"
               }
             }
           }
@@ -906,11 +909,15 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.3, )"
+              "version": "[10.0.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
