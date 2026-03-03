@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SYvgN8/BUjg=",
+  "dgSpecHash": "L10NUfwM5to=",
   "success": true,
   "projectFilePath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Tests\\EShop.Tests.csproj",
   "expectedPackageFiles": [
@@ -19,15 +19,5 @@
     "C:\\Users\\H826422\\.nuget\\packages\\xunit.extensibility.execution\\2.9.3\\xunit.extensibility.execution.2.9.3.nupkg.sha512",
     "C:\\Users\\H826422\\.nuget\\packages\\xunit.runner.visualstudio\\3.1.4\\xunit.runner.visualstudio.3.1.4.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://hqv-robotics.pkgs.visualstudio.com/_packaging/ToolsNuGet/nuget/v3/index.json.",
-      "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Tests\\EShop.Tests.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Tests\\EShop.Tests.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }
