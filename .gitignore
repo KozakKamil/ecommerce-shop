@@ -1,0 +1,32 @@
+@"
+# Angular
+/dist
+/tmp
+/out-tsc
+/bazel-out
+node_modules/
+npm-debug.log
+yarn-error.log
+.angular/cache
+
+# IDEs
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+packages/
+*.nupkg
+project.lock.json
+
+# System
+.DS_Store
+Thumbs.db
+"@ | Set-Content -Path ".gitignore" -Encoding UTF8
