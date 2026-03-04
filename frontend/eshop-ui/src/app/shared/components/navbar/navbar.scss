@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1a1a2e;
+  color: white;
+}
+
+.logo{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+ }
+
+ .nav-links a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.2s;
+ }
+
+ .nav-links a:hover {
+  color: #00e5ff;
+ }
+
+ .cart-link {
+  font-weight: bold;
+  color: #00e5ff !important;
+ }

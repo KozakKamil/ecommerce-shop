@@ -1,0 +1,17 @@
+@if (product) {
+  <div class="detail-container">
+    <img [src]="product.imageUrl || 'https://placehold.co/600x400?text=' + product.name"
+         [alt]="product.name"/>
+
+    <div class="info">
+      <h1>{{ product.name }}</h1>
+      <p class="price">{{ product.price | currency: 'PLN' }}</p>
+      <p class="description">{{ product.description }}</p>
+      <p class="stock">Dostępność: {{ product.stock }} szt.</p>
+      <button class="btn-cart">🛒 Dodaj do koszyka</button>
+    </div>
+  </div>
+}
+@else {
+  <p class="loading">Ładowanie...</p>
+}

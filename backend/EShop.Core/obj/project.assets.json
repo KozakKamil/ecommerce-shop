@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ECommerce-Shop\\backend\\EShop.Core\\EShop.Core.csproj",
+      "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj",
       "projectName": "EShop.Core",
-      "projectPath": "C:\\Users\\H826422\\source\\repos\\ECommerce-Shop\\backend\\EShop.Core\\EShop.Core.csproj",
+      "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj",
       "packagesPath": "C:\\Users\\H826422\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\H826422\\source\\repos\\ECommerce-Shop\\backend\\EShop.Core\\obj\\",
+      "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

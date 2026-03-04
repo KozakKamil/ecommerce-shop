@@ -1,0 +1,15 @@
+<div class="card">
+  <img [src]="product.imageUrl || 'https://placehold.co/300x200?text=' + product.name"
+       [alt]="product.name"/>
+  <div class="card-body">
+    <h3>{{ product.name }}</h3>
+    <p class="price">{{ product.price | currency: 'PLN' }}</p>
+    <p class="stock" [class.low]="product.stock < 5">
+      Dostępność: {{ product.stock }} szt.
+    </p>
+    <div class="actions">
+      <a [routerLink]="['/products', product.id]" class="btn-details">Szczegóły</a>
+      <button class="btn-cart" (click)="onAddToCart()">🛒 Do koszyka</button>
+    </div>
+  </div>
+</div>

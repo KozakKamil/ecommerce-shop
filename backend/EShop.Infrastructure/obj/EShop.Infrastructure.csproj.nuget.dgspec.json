@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj": {}
+    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj": {
+    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj",
+        "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj",
         "projectName": "EShop.Core",
-        "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj",
+        "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj",
         "packagesPath": "C:\\Users\\H826422\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\obj\\",
+        "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -345,14 +345,14 @@
         }
       }
     },
-    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj": {
+    "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj",
         "projectName": "EShop.Infrastructure",
-        "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\EShop.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\EShop.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\H826422\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -375,8 +375,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj": {
-                "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\EShop.Core\\EShop.Core.csproj"
+              "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj": {
+                "projectPath": "C:\\Users\\H826422\\source\\repos\\ecommerce-shop\\backend\\ESHop.Core\\EShop.Core.csproj"
               }
             }
           }
@@ -397,6 +397,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",

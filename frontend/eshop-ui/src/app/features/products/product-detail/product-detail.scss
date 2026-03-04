@@ -1,0 +1,61 @@
+.datail-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  background: white;
+  border-radius: 12px;
+}
+
+img{
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.info{
+  flex: 1;
+}
+
+h1{
+  margin: 0 0 1rem;
+}
+
+.price{
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e91e63;
+}
+
+.description{
+  color: #666;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+.stock{
+  color: #888;
+}
+
+.btn-cart{
+  margin-top: 1.5rem;
+  padding: 0.75rem 2 rem;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.btn-cart:hover{
+  background: #16213e;
+}
+
+.loading{
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+}
