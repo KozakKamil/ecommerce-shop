@@ -1,0 +1,29 @@
+<div class="product-card">
+  <div class="product-image">
+    <img
+      [src]="product.imageUrl || 'https://via.placeholder.com/300x200?text=Brak+zdjęcia'"
+      [alt]="product.name"
+    />
+  </div>
+  <div class="product-info">
+    <h3>{{ product.name }}</h3>
+    <p class="description">{{ product.description | slice:0:80 }}...</p>
+    @if (product.category) {
+      <p class="category">📁 {{ product.category.name }}</p>
+    }
+    <div class="product-footer">
+      <span class="price">{{ product.price | number:'1.2-2' }} zł</span>
+      <span class="stock" [class.low]="product.stock < 5">
+        Dostępnych: {{ product.stock }}
+      </span>
+    </div>
+    <button
+      class="add-to-cart-btn"
+      (click)="addToCart()"
+      [disabled]="adding || product.stock === 0"
+      [class.added]="added"
+    >
+      {{ added ? '✅ Dodano!' : adding ? '⏳ Dodawanie...' : '🛒 Dodaj do koszyka' }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="product-list-container">
+  <h2>🛍️ Produkty</h2>
+
+  <div class="filters">
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Szukaj produktu..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      />
+      <button (click)="onSearch()">Szukaj</button>
+    </div>
+
+    <div class="category-filter">
+      <button
+        [class.active]="!selectedCategoryId"
+        (click)="onCategoryChange(undefined)"
+      >
+        Wszystkie
+      </button>
+      @for (cat of categories; track cat.id) {
+        <button
+          [class.active]="selectedCategoryId === cat.id"
+          (click)="onCategoryChange(cat.id)"
+        >
+          {{ cat.name }}
+        </button>
+      }
+    </div>
+  </div>
+
+  @if (loading) {
+    <p class="no-results">Ładowanie produktów...</p>
+  } @else if (products.length > 0) {
+    <div class="products-grid">
+      @for (product of products; track product.id) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+  } @else {
+    <p class="no-results">Brak produktów do wyświetlenia.</p>
+  }
+</div>

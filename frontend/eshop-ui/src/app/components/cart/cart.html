@@ -1,0 +1,67 @@
+<div class="cart-container">
+  <h2>🛒 Twój koszyk</h2>
+
+  @if (loading) {
+    <div class="loading">Ładowanie...</div>
+  }
+
+  @if (!loading && cartItems.length === 0) {
+    <div class="empty-cart">
+      <p>Koszyk jest pusty 😢</p>
+      <a routerLink="/products" class="shop-btn">Idź na zakupy →</a>
+    </div>
+  }
+
+  @if (!loading && cartItems.length > 0) {
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Produkt</th>
+          <th>Cena</th>
+          <th>Ilość</th>
+          <th>Suma</th>
+          <th>Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of cartItems; track item.id) {
+          <tr>
+            <td class="product-cell">
+              <img
+                [src]="item.product.imageUrl || 'https://via.placeholder.com/60'"
+                [alt]="item.product.name"
+              />
+              <span>{{ item.product.name }}</span>
+            </td>
+            <td>{{ item.product.price | currency:'PLN':'symbol':'1.2-2':'pl' }}</td>
+            <td class="quantity-cell">
+              <button (click)="decreaseQuantity(item)">−</button>
+              <span>{{ item.quantity }}</span>
+              <button (click)="increaseQuantity(item)">+</button>
+            </td>
+            <td class="subtotal">{{ item.product.price * item.quantity | currency:'PLN':'symbol':'1.2-2':'pl' }}</td>
+            <td>
+              <button class="remove-btn" (click)="removeItem(item)">🗑️</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="cart-summary">
+      <div class="total">
+        <strong>Suma: {{ totalPrice | currency:'PLN':'symbol':'1.2-2':'pl' }}</strong>
+      </div>
+      <div class="cart-actions">
+        <button class="clear-btn" (click)="clearCart()">Wyczyść koszyk</button>
+        <button
+          class="order-btn"
+          (click)="placeOrder()"
+          [disabled]="placingOrder"
+        >
+          {{ placingOrder ? '⏳ Składanie...' : '📦 Złóż zamówienie' }}
+        </button>
+      </div>
+    </div>
+  }
+</div>

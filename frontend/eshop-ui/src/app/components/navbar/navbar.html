@@ -1,0 +1,21 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/" class="logo">🛒 eShop</a>
+  </div>
+  <ul class="navbar-menu">
+    <li>
+      <a routerLink="/products" routerLinkActive="active">Produkty</a>
+    </li>
+    <li>
+      <a routerLink="/cart" routerLinkActive="active">
+        Koszyk
+        @if (cartCount$ | async; as count) {
+          <span class="badge">{{ count }}</span>
+        }
+      </a>
+    </li>
+    <li>
+      <a routerLink="/orders" routerLinkActive="active">Zamówienia</a>
+    </li>
+  </ul>
+</nav>
