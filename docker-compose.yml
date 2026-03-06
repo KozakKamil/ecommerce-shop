@@ -24,6 +24,9 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection=Host=db;Database=eshopdb;Username=postgres;Password=postgres123
       - ASPNETCORE_ENVIRONMENT=Development
+      - Jwt__Key=TwojSuperTajnyKluczJWTKtoryMusiMiecMin32Znaki!
+      - Jwt__Issuer=EShop
+      - Jwt__Audience=EShopUsers
     depends_on:
       db:
         condition: service_healthy

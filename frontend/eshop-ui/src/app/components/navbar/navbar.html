@@ -6,16 +6,30 @@
     <li>
       <a routerLink="/products" routerLinkActive="active">Produkty</a>
     </li>
-    <li>
-      <a routerLink="/cart" routerLinkActive="active">
-        Koszyk
-        @if (cartCount$ | async; as count) {
-          <span class="badge">{{ count }}</span>
-        }
-      </a>
-    </li>
-    <li>
-      <a routerLink="/orders" routerLinkActive="active">Zamówienia</a>
-    </li>
+
+    @if (currentUser$ | async; as user) {
+      <li>
+        <a routerLink="/cart" routerLinkActive="active">
+          Koszyk
+          @if (cartCount$ | async; as count) {
+            <span class="badge">{{ count }}</span>
+          }
+        </a>
+      </li>
+      <li>
+        <a routerLink="/orders" routerLinkActive="active">Zamówienia</a>
+      </li>
+      <li class="user-info">
+        <span class="user-name">👤 {{ user.firstName }}</span>
+        <a (click)="logout()" class="logout-link">Wyloguj</a>
+      </li>
+    } @else {
+      <li>
+        <a routerLink="/login" routerLinkActive="active">Logowanie</a>
+      </li>
+      <li>
+        <a routerLink="/register" routerLinkActive="active">Rejestracja</a>
+      </li>
+    }
   </ul>
 </nav>

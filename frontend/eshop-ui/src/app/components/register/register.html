@@ -1,0 +1,67 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>📝 Rejestracja</h2>
+
+    @if (error) {
+      <div class="error-message">{{ error }}</div>
+    }
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">Imię</label>
+        <input
+          type="text"
+          id="firstName"
+          [(ngModel)]="registerDto.firstName"
+          name="firstName"
+          placeholder="Jan"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Nazwisko</label>
+        <input
+          type="text"
+          id="lastName"
+          [(ngModel)]="registerDto.lastName"
+          name="lastName"
+          placeholder="Kowalski"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="registerDto.email"
+          name="email"
+          placeholder="twoj@email.pl"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Hasło</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="registerDto.password"
+          name="password"
+          placeholder="Min. 6 znaków, wielka litera, cyfra"
+          required
+        />
+      </div>
+
+      <button type="submit" [disabled]="loading" class="btn-primary">
+        {{ loading ? 'Rejestracja...' : 'Zarejestruj się' }}
+      </button>
+    </form>
+
+    <p class="auth-link">
+      Masz już konto? <a routerLink="/login">Zaloguj się</a>
+    </p>
+  </div>
+</div>
