@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="EShop.API/EShop.API.csproj" />
+  <Project Path="EShop.Core/EShop.Core.csproj" />
+  <Project Path="EShop.Infrastructure/EShop.Infrastructure.csproj" />
+  <Project Path="EShop.Tests/EShop.Tests.csproj" />
+</Solution>
