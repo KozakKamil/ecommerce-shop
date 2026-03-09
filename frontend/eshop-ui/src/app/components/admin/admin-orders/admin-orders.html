@@ -1,0 +1,43 @@
+<div class="admin-orders">
+  <div class="header">
+    <h1>🛒 Zarządzanie zamówieniami</h1>
+    <a routerLink="/admin" class="btn-back">← Dashboard</a>
+  </div>
+
+  @if (loading) {
+    <p>Ładowanie...</p>
+  } @else {
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Użytkownik</th>
+          <th>Data</th>
+          <th>Kwota</th>
+          <th>Status</th>
+          <th>Zmień status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (order of orders; track order.id) {
+          <tr>
+            <td>#{{ order.id }}</td>
+            <td>{{ order.userId }}</td>
+            <td>{{ order.orderDate | date:'dd.MM.yyyy HH:mm' }}</td>
+            <td>{{ order.totalAmount | currency:'PLN':'symbol':'1.2-2':'pl' }}</td>
+            <td>{{ getStatusLabel(order.status) }}</td>
+            <td>
+              <select (change)="changeStatus(order.id, $any($event.target).value)" [value]="order.status">
+                @for (status of statuses; track status.value) {
+                  <option [value]="status.value" [selected]="status.value === order.status">
+                    {{ status.label }}
+                  </option>
+                }
+              </select>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

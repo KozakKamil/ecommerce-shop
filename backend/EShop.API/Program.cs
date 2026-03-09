@@ -69,10 +69,35 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Migracje + Seed Admin
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
+
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+
+    // Stwórz role
+    if (!await roleManager.RoleExistsAsync("Admin"))
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    if (!await roleManager.RoleExistsAsync("User"))
+        await roleManager.CreateAsync(new IdentityRole("User"));
+
+    // Stwórz konto admina
+    var adminEmail = "admin@eshop.pl";
+    if (await userManager.FindByEmailAsync(adminEmail) == null)
+    {
+        var admin = new AppUser
+        {
+            Email = adminEmail,
+            UserName = adminEmail,
+            FirstName = "Admin",
+            LastName = "EShop"
+        };
+        await userManager.CreateAsync(admin, "Admin123");
+        await userManager.AddToRoleAsync(admin, "Admin");
+    }
 }
 
 if (app.Environment.IsDevelopment())

@@ -40,12 +40,18 @@ export class AuthService {
     return !!this.getToken();
   }
 
+  isAdmin(): boolean {
+    const user = this.currentUserSubject.value;
+    return user?.role === 'Admin';
+  }
+
   private handleAuth(response: AuthResponse): void {
     localStorage.setItem('token', response.token);
     const user: User = {
       email: response.email,
       firstName: response.firstName,
-      lastName: response.lastName
+      lastName: response.lastName,
+      role: response.role
     };
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSubject.next(user);

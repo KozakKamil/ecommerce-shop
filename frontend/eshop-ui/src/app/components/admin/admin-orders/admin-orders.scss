@@ -1,0 +1,60 @@
+.admin-orders 
+{ 
+  padding: 2rem; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+.header 
+{ 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 1.5rem;
+  h1 
+  { 
+    color: #e94560; 
+  }
+}
+.btn-back 
+{ 
+  color: #999; 
+  text-decoration: none; 
+  &:hover 
+  { 
+    color: white; 
+  } 
+}
+
+.orders-table {
+  width: 100%; 
+  border-collapse: collapse;
+  th, td 
+  { 
+    padding: 0.75rem; 
+    text-align: left; 
+    border-bottom: 1px solid #333; 
+  }
+  th 
+  { 
+    color: #999; 
+    font-size: 0.85rem; 
+    text-transform: uppercase; 
+  }
+  td 
+  { 
+    color: white; 
+  }
+
+  select {
+    background: #0f3460; 
+    color: white; 
+    border: 1px solid #333;
+    padding: 0.4rem; 
+    border-radius: 6px; cursor: pointer;
+    &:focus 
+    { 
+      outline: none; 
+      border-color: #e94560; 
+    }
+  }
+}

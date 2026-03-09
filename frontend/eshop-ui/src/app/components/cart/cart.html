@@ -55,11 +55,11 @@
       <div class="cart-actions">
         <button class="clear-btn" (click)="clearCart()">Wyczyść koszyk</button>
         <button
-          class="order-btn"
-          (click)="placeOrder()"
-          [disabled]="placingOrder"
+          class="btn-stripe"
+          (click)="payWithStripe()"
+          [disabled]="processingPayment || cartItems.length === 0"
         >
-          {{ placingOrder ? '⏳ Składanie...' : '📦 Złóż zamówienie' }}
+          {{ processingPayment ? 'Przekierowywanie...' : '💳 Zapłać kartą (Stripe)' }}
         </button>
       </div>
     </div>

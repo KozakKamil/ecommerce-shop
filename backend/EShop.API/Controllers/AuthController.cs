@@ -14,11 +14,13 @@ namespace EShop.API.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly IConfiguration _configuration;
 
-    public AuthController(UserManager<AppUser> userManager, IConfiguration configuration)
+    public AuthController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
     {
         _userManager = userManager;
+        _roleManager = roleManager;
         _configuration = configuration;
     }
 
@@ -38,7 +40,10 @@ public class AuthController : ControllerBase
         if (!result.Succeeded)
             return BadRequest(result.Errors);
 
-        return Ok(GenerateToken(user));
+        if(!await _roleManager.RoleExistsAsync("User"))
+            await _roleManager.CreateAsync(new IdentityRole("User"));
+
+        return Ok(await GenerateTokenAsync(user));
     }
 
     [HttpPost("login")]
@@ -52,17 +57,21 @@ public class AuthController : ControllerBase
         if (!validPassword)
             return Unauthorized("Nieprawidłowy email lub hasło");
 
-        return Ok(GenerateToken(user));
+        return Ok(await GenerateTokenAsync(user));
     }
 
-    private AuthResponseDto GenerateToken(AppUser user)
+    private async Task<AuthResponseDto> GenerateTokenAsync(AppUser user)
     {
+        var roles = await _userManager.GetRolesAsync(user);
+        var role = roles.FirstOrDefault() ?? "User";
+
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id),
             new(ClaimTypes.Email, user.Email!),
             new("firstName", user.FirstName),
-            new("lastName", user.LastName)
+            new("lastName", user.LastName),
+            new(ClaimTypes.Role, role)
         };
 
         var key = new SymmetricSecurityKey(
@@ -82,7 +91,8 @@ public class AuthController : ControllerBase
             Token = new JwtSecurityTokenHandler().WriteToken(token),
             Email = user.Email!,
             FirstName = user.FirstName,
-            LastName = user.LastName
+            LastName = user.LastName,
+            Role = role
         };
     }
 }

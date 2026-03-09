@@ -152,3 +152,25 @@
     cursor: not-allowed;
   }
 }
+
+.btn-stripe {
+  width: 100%;
+  padding: 0.85rem;
+  background: #635bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+
+  &:hover {
+    background: #4b45c6;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
