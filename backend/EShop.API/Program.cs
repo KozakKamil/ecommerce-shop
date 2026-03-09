@@ -1,5 +1,7 @@
 using EShop.Core.Entities;
+using EShop.Core.Interfaces;
 using EShop.Infrastructure.Data;
+using EShop.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +44,9 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
     };
 });
+
+// Stripe
+builder.Services.AddScoped<IStripeService, StripeService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
