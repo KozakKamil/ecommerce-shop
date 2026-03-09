@@ -1,0 +1,35 @@
+<div class="admin-dashboard">
+  <h1>👑 Panel Administracyjny</h1>
+
+  @if (loading) {
+    <p>Ładowanie...</p>
+  } @else if (stats) {
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-icon">📦</span>
+        <span class="stat-value">{{ stats.totalProducts }}</span>
+        <span class="stat-label">Produkty</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🛒</span>
+        <span class="stat-value">{{ stats.totalOrders }}</span>
+        <span class="stat-label">Zamówienia</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">💰</span>
+        <span class="stat-value">{{ stats.totalRevenue | currency:'PLN':'symbol':'1.2-2':'pl' }}</span>
+        <span class="stat-label">Przychód</span>
+      </div>
+      <div class="stat-card warning">
+        <span class="stat-icon">⏳</span>
+        <span class="stat-value">{{ stats.pendingOrders }}</span>
+        <span class="stat-label">Oczekujące</span>
+      </div>
+    </div>
+
+    <div class="admin-links">
+      <a routerLink="/admin/products" class="admin-btn">📦 Zarządzaj produktami</a>
+      <a routerLink="/admin/orders" class="admin-btn">🛒 Zarządzaj zamówieniami</a>
+    </div>
+  }
+</div>

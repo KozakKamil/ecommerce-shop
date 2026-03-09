@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../services/cart';
 import { OrderService } from '../../services/order';
+import { PaymentService } from '../../services/payment';
 import { CartItem } from '../../models/cart.model';
 import { Router } from '@angular/router';
 
@@ -16,10 +17,12 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   loading = true;
   placingOrder = false;
+  processingPayment = false;
 
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
+    private paymentService: PaymentService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -77,6 +80,22 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart().subscribe({
       next: () => this.loadCart(),
       error: (err) => console.error(err)
+    });
+  }
+
+  payWithStripe(): void {
+    if (this.processingPayment) return;
+    this.processingPayment = true;
+
+    this.paymentService.createCheckoutSession('user-1').subscribe({
+      next: (response) => {
+        window.location.href = response.url;
+      },
+      error: (err) => {
+        this.processingPayment = false;
+        console.error('Błąd płatności:', err);
+        this.cdr.detectChanges();
+      }
     });
   }
 
