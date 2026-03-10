@@ -11,15 +11,15 @@ export interface CheckoutSessionResponse {
   providedIn: 'root'
 })
 
-export class PaymentService{
+export class PaymentService {
   private apiUrl = '/api/payments';
 
   constructor(private http: HttpClient) {}
 
-  createCheckoutSession(userId: string): Observable<CheckoutSessionResponse> {
+  createCheckoutSession(): Observable<CheckoutSessionResponse> {
     return this.http.post<CheckoutSessionResponse>(
-      `${this.apiUrl}/create-checkout-session`, 
-      { userId }
+      `${this.apiUrl}/create-checkout-session`,
+      {}
     );
   }
 }

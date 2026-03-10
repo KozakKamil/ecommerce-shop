@@ -87,7 +87,7 @@ export class CartComponent implements OnInit {
     if (this.processingPayment) return;
     this.processingPayment = true;
 
-    this.paymentService.createCheckoutSession('user-1').subscribe({
+    this.paymentService.createCheckoutSession().subscribe({
       next: (response) => {
         window.location.href = response.url;
       },
