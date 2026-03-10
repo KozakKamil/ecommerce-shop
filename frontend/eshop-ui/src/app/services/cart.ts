@@ -8,7 +8,7 @@ import { CartItem, AddToCartDto, UpdateCartItemDto } from '../models/cart.model'
   providedIn: 'root'
 })
 export class CartService {
-  private apiUrl = '/api';
+  private apiUrl = '/api/cart';
   private userId = 'user-1';
 
   private cartCountSubject = new BehaviorSubject<number>(0);

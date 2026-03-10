@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -22,7 +22,10 @@ export class AdminOrdersComponent implements OnInit {
     { value: 5, label: '❌ Anulowane' }
   ];
 
-  constructor(private adminService: AdminService) {}
+  constructor(
+    private adminService: AdminService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadOrders();
@@ -31,8 +34,8 @@ export class AdminOrdersComponent implements OnInit {
   loadOrders(): void {
     this.loading = true;
     this.adminService.getOrders().subscribe({
-      next: (orders) => { this.orders = orders; this.loading = false; },
-      error: () => this.loading = false
+      next: (orders) => { this.orders = orders; this.loading = false; this.cdr.detectChanges(); },
+      error: () => { this.loading = false; this.cdr.detectChanges(); }
     });
   }
 
