@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -26,19 +26,23 @@ export class AdminProductsComponent implements OnInit {
 
   constructor(
     private adminService: AdminService,
-    private productService: ProductService
+    private productService: ProductService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.loadProducts();
-    this.productService.getCategories().subscribe(c => this.categories = c);
+    this.productService.getCategories().subscribe(c => {
+      this.categories = c;
+      this.cdr.detectChanges();
+    });
   }
 
   loadProducts(): void {
     this.loading = true;
     this.adminService.getProducts().subscribe({
-      next: (p) => { this.products = p; this.loading = false; },
-      error: () => this.loading = false
+      next: (p) => { this.products = p; this.loading = false; this.cdr.detectChanges(); },
+      error: () => { this.loading = false; this.cdr.detectChanges(); }
     });
   }
 
@@ -64,18 +68,18 @@ export class AdminProductsComponent implements OnInit {
   saveProduct(): void {
     if (this.editingId) {
       this.adminService.updateProduct(this.editingId, this.form).subscribe({
-        next: () => { this.showForm = false; this.loadProducts(); }
+        next: () => { this.showForm = false; this.loadProducts(); this.cdr.detectChanges(); }
       });
     } else {
       this.adminService.createProduct(this.form).subscribe({
-        next: () => { this.showForm = false; this.loadProducts(); }
+        next: () => { this.showForm = false; this.loadProducts(); this.cdr.detectChanges(); }
       });
     }
   }
 
   deleteProduct(id: number): void {
     if (confirm('Czy na pewno chcesz usunąć ten produkt?')) {
-      this.adminService.deleteProduct(id).subscribe(() => this.loadProducts());
+      this.adminService.deleteProduct(id).subscribe(() => { this.loadProducts(); this.cdr.detectChanges(); });
     }
   }
 

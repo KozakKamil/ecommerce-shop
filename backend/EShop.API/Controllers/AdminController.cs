@@ -19,7 +19,7 @@ public class AdminController : ControllerBase
         _context = context;
     }
 
-    [HttpPost("dashboard")]
+    [HttpGet("dashboard")]
     public async Task<ActionResult> GetDashboard()
     {
         var totalProducts = await _context.Products.CountAsync();
