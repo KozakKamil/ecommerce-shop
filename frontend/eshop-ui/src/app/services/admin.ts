@@ -52,6 +52,6 @@ export class AdminService {
   }
 
   updateOrderStatus(id: number, status: number): Observable<void> {
-    return thishttp.put<void>(`${this.apiUrl}/orders/${id}/status`, { status });
+    return this.http.put<void>(`${this.apiUrl}/orders/${id}/status`, { status });
   }
 }
