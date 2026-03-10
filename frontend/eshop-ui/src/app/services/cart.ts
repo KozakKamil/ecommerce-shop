@@ -9,7 +9,6 @@ import { CartItem, AddToCartDto, UpdateCartItemDto } from '../models/cart.model'
 })
 export class CartService {
   private apiUrl = '/api/cart';
-  private userId = 'user-1';
 
   private cartCountSubject = new BehaviorSubject<number>(0);
   cartCount$ = this.cartCountSubject.asObservable();
@@ -19,14 +18,13 @@ export class CartService {
   }
 
   getCartItems(): Observable<CartItem[]> {
-    return this.http.get<CartItem[]>(`${this.apiUrl}/${this.userId}`);
+    return this.http.get<CartItem[]>(this.apiUrl);
   }
 
   addToCart(productId: number, quantity: number = 1): Observable<CartItem> {
     const dto: AddToCartDto = {
       productId,
-      quantity,
-      userId: this.userId
+      quantity
     };
     return this.http.post<CartItem>(this.apiUrl, dto).pipe(
       tap(() => this.refreshCartCount())
@@ -47,13 +45,13 @@ export class CartService {
   }
 
   clearCart(): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${this.userId}`).pipe(
+    return this.http.delete<void>(this.apiUrl).pipe(
       tap(() => this.refreshCartCount())
     );
   }
 
   private refreshCartCount(): void {
-    this.http.get<CartItem[]>(`${this.apiUrl}/${this.userId}`).subscribe({
+    this.http.get<CartItem[]>(this.apiUrl).subscribe({
       next: (items) => {
         const count = items.reduce((sum, item) => sum + item.quantity, 0);
         this.ngZone.run(() => {

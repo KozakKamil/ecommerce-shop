@@ -8,13 +8,11 @@ export interface CartItem {
     price: number;
     imageUrl: string;
   };
-  userId: string;
 }
 
 export interface AddToCartDto {
   productId: number;
   quantity: number;
-  userId: string;
 }
 
 export interface UpdateCartItemDto {
