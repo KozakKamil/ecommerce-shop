@@ -30,3 +30,6 @@ project.lock.json
 .DS_Store
 Thumbs.db
 "@ | Set-Content -Path ".gitignore" -Encoding UTF8
+# Environment
+.env
+.env.*
