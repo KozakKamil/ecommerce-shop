@@ -1,11 +1,14 @@
 using EShop.API.DTOs;
 using EShop.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EShop.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class PaymentsController : ControllerBase
 {
     private readonly IStripeService _stripeService;
@@ -15,17 +18,20 @@ public class PaymentsController : ControllerBase
         _stripeService = stripeService;
     }
 
+    private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
     [HttpPost("create-checkout-session")]
-    public async Task<ActionResult<CheckoutSessionResponseDto>> CreateCheckoutSession(CreateCheckoutSessionDto dto)
+    public async Task<ActionResult> CreateCheckoutSession()
     {
         try
         {
-            var (sessionId, url) = await _stripeService.CreateCheckoutSessionAsync(dto.UserId);
+            var userId = GetUserId();
+            var (sessionId, url) = await _stripeService.CreateCheckoutSessionAsync(userId);
 
             return Ok(new CheckoutSessionResponseDto
             {
                 SessionId = sessionId,
-                Url = url   
+                Url = url
             });
         }
         catch (InvalidOperationException ex)
@@ -35,6 +41,7 @@ public class PaymentsController : ControllerBase
     }
 
     [HttpPost("webhook")]
+    [AllowAnonymous]
     public async Task<IActionResult> Webhook()
     {
         var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
