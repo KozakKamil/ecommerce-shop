@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders';
+import { ProductDetailComponent } from './components/product-detail/product-detail';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 
@@ -19,5 +20,6 @@ export const routes: Routes = [
   { path: 'orders', component: OrdersComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminDashboardComponent, canActivate: [adminGuard] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [adminGuard] },
-  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [adminGuard] }
+  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [adminGuard] },
+  { path: 'products/:id', component: ProductDetailComponent }
 ];

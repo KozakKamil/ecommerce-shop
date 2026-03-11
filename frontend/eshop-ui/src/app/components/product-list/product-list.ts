@@ -34,12 +34,12 @@ export class ProductListComponent implements OnInit {
       next: (products) => {
         this.products = products;
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Błąd ładowania produktów:', err);
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     });
   }
@@ -48,7 +48,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getCategories().subscribe({
       next: (categories) => {
         this.categories = categories;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       },
       error: (err) => console.error('Błąd ładowania kategorii:', err)
     });
