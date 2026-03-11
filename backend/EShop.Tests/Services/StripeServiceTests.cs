@@ -13,8 +13,8 @@ public class StripeServiceTests
         {
             { "Stripe:SecretKey", "sk_test_fake_key" },
             { "Stripe:WebhookSecret", "whsec_fake_secret" },
-            { "Stripe:SuccessUrl", "http://localhost:4200/orders" },
-            { "Stripe:CancelUrl", "http://localhost:4200/cart" }
+            { "Stripe:SuccessUrl", "http://localhost:4200/payment/success" },
+            { "Stripe:CancelUrl", "http://localhost:4200/payment/cancel" }
         };
 
         return new ConfigurationBuilder()
@@ -35,8 +35,9 @@ public class StripeServiceTests
     }
 
     [Fact]
-    public async Task CreateCheckoutSession_WithCartItems_CreatesOrderAndClearsCart()
+    public async Task CreateCheckoutSession_WithCartItems_StripeFailure_CartNotCleared()
     {
+        // Po naszej zmianie: jeśli Stripe rzuci wyjątek, koszyk zostaje nienaruszony
         var context = TestDbContextFactory.Create("StripeDb_CreateOrder");
         var config = CreateTestConfiguration();
 
@@ -63,48 +64,44 @@ public class StripeServiceTests
 
         var service = new StripeService(context, config);
 
-        try
-        {
-            await service.CreateCheckoutSessionAsync("user-stripe");
-        }
-        catch
-        {
+        // Stripe rzuci wyjątek (fałszywy klucz) - koszyk powinien zostać
+        await Assert.ThrowsAnyAsync<Exception>(
+            () => service.CreateCheckoutSessionAsync("user-stripe")
+        );
 
-        }
-
-        var orders = context.Orders.Where(o => o.UserId == "user-stripe").ToList();
-        Assert.Single(orders);
-        Assert.Equal(199.98m, orders[0].TotalAmount);
-        Assert.Equal(OrderStatus.Pending, orders[0].Status);
-
+        // Koszyk NIE powinien być wyczyszczony
         var cartItems = context.CartItems.Where(ci => ci.UserId == "user-stripe").ToList();
-        Assert.Empty(cartItems);
+        Assert.Single(cartItems);
+
+        // Zamówienie NIE powinno być stworzone
+        var orders = context.Orders.Where(o => o.UserId == "user-stripe").ToList();
+        Assert.Empty(orders);
     }
 
     [Fact]
-    public async Task CreateCheckoutSession_SetsCorrectOrderItems()
+    public async Task CreateCheckoutSession_SetsCorrectOrderItems_StripeFailure_CartPreserved()
     {
         var context = TestDbContextFactory.Create("StripeDb_OrderItems");
         var config = CreateTestConfiguration();
 
         var product1 = new Product
         {
-            Name = "P1", 
-            Description = "O1", 
-            Price = 50m, 
-            ImageUrl = "", 
-            Stock = 5, 
+            Name = "P1",
+            Description = "O1",
+            Price = 50m,
+            ImageUrl = "",
+            Stock = 5,
             CategoryId = 1
         };
 
-        var product2 = new Product 
-        { 
-            Name = "P2", 
-            Description = "O2", 
-            Price = 30m, 
-            ImageUrl = "", 
-            Stock = 3, 
-            CategoryId = 1 
+        var product2 = new Product
+        {
+            Name = "P2",
+            Description = "O2",
+            Price = 30m,
+            ImageUrl = "",
+            Stock = 3,
+            CategoryId = 1
         };
 
         context.Products.AddRange(product1, product2);
@@ -118,14 +115,15 @@ public class StripeServiceTests
 
         var service = new StripeService(context, config);
 
-        try
-        {
-            await service.CreateCheckoutSessionAsync("user-items");
-        }
-        catch { }
+        // Stripe rzuci wyjątek - oba produkty w koszyku powinny zostać
+        await Assert.ThrowsAnyAsync<Exception>(
+            () => service.CreateCheckoutSessionAsync("user-items")
+        );
 
-        var order = context.Orders.First(o => o.UserId == "user-items");
-        Assert.Equal(140m, order.TotalAmount);
-        Assert.Equal(2, order.Items.Count);
+        var cartItems = context.CartItems.Where(ci => ci.UserId == "user-items").ToList();
+        Assert.Equal(2, cartItems.Count);
+
+        var orders = context.Orders.Where(o => o.UserId == "user-items").ToList();
+        Assert.Empty(orders);
     }
 }

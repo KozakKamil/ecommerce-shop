@@ -8,6 +8,8 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders';
 import { ProductDetailComponent } from './components/product-detail/product-detail';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success';
+import { PaymentCancelComponent } from './components/payment-cancel/payment-cancel';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 
@@ -21,5 +23,7 @@ export const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent, canActivate: [adminGuard] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [adminGuard] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [adminGuard] },
+  { path: 'payment/success', component: PaymentSuccessComponent, canActivate: [authGuard] },
+{ path: 'payment/cancel', component: PaymentCancelComponent, canActivate: [authGuard] },
   { path: 'products/:id', component: ProductDetailComponent }
 ];
