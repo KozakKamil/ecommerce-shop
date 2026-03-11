@@ -18,10 +18,22 @@ export class ProductListComponent implements OnInit {
   searchQuery = '';
   loading = true;
 
+  currentPage = 1;
+  pageSize = 8;
+  totalCount = 0;
+
   constructor(
     private productService: ProductService,
     private cdr: ChangeDetectorRef
   ) {}
+
+  get totalPages(): number {
+    return Math.ceil(this.totalCount / this.pageSize);
+  }
+
+  get pages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -30,9 +42,10 @@ export class ProductListComponent implements OnInit {
 
   loadProducts(): void {
     this.loading = true;
-    this.productService.getProducts(this.selectedCategoryId, this.searchQuery).subscribe({
-      next: (products) => {
-        this.products = products;
+    this.productService.getProducts(this.selectedCategoryId, this.searchQuery, this.currentPage, this.pageSize).subscribe({
+      next: (data) => {
+        this.products = data.items;
+        this.totalCount = data.totalCount;
         this.loading = false;
         this.cdr.markForCheck();
       },
@@ -56,10 +69,19 @@ export class ProductListComponent implements OnInit {
 
   onCategoryChange(categoryId: number | undefined): void {
     this.selectedCategoryId = categoryId;
+    this.currentPage = 1;
     this.loadProducts();
   }
 
   onSearch(): void {
+    this.currentPage = 1;
     this.loadProducts();
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.loadProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

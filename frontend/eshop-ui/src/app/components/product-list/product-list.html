@@ -13,17 +13,11 @@
     </div>
 
     <div class="category-filter">
-      <button
-        [class.active]="!selectedCategoryId"
-        (click)="onCategoryChange(undefined)"
-      >
+      <button [class.active]="!selectedCategoryId" (click)="onCategoryChange(undefined)">
         Wszystkie
       </button>
       @for (cat of categories; track cat.id) {
-        <button
-          [class.active]="selectedCategoryId === cat.id"
-          (click)="onCategoryChange(cat.id)"
-        >
+        <button [class.active]="selectedCategoryId === cat.id" (click)="onCategoryChange(cat.id)">
           {{ cat.name }}
         </button>
       }
@@ -38,6 +32,32 @@
         <app-product-card [product]="product"></app-product-card>
       }
     </div>
+
+    @if (totalPages > 1) {
+      <div class="pagination">
+        <button class="page-btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+          ‹
+        </button>
+
+        @for (page of pages; track page) {
+          <button
+            class="page-btn"
+            [class.active]="page === currentPage"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+
+        <button class="page-btn" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+          ›
+        </button>
+      </div>
+    }
+
+    <p class="pagination-info">
+      Strona {{ currentPage }} z {{ totalPages }} ({{ totalCount }} produktów)
+    </p>
   } @else {
     <p class="no-results">Brak produktów do wyświetlenia.</p>
   }
