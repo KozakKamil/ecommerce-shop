@@ -52,6 +52,9 @@
       <div class="total">
         <strong>Suma: {{ totalPrice | currency:'PLN':'symbol':'1.2-2':'pl' }}</strong>
       </div>
+      @if (totalPrice < 2){
+        <p class = "min-amount-warning">⚠️ Minimalna kwota zamówienia to 2,00 zł</p>
+      }
       <div class="cart-actions">
         <button class="clear-btn" (click)="clearCart()">Wyczyść koszyk</button>
         <button

@@ -1,0 +1,39 @@
+<div class="success-container">
+  <div class="success-card">
+
+    <div class="checkmark">
+      <svg viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r="25" fill="none"/>
+        <path fill="none" d="M14 27l8 8 16-16"/>
+      </svg>
+    </div>
+
+    <h1>Płatność zakończona!</h1>
+    <p class="subtitle">Dziękujemy za zakup. Twoje zamówienie zostało przyjęte.</p>
+
+    @if (loading) {
+      <p class="loading">Ładowanie szczegółów...</p>
+    } @else if (order) {
+      <div class="order-summary">
+        <div class="order-row">
+          <span>Numer zamówienia</span>
+          <strong>#{{ order.id }}</strong>
+        </div>
+        <div class="order-row">
+          <span>Kwota</span>
+          <strong>{{ order.totalAmount | number:'1.2-2' }} zł</strong>
+        </div>
+        <div class="order-row">
+          <span>Status</span>
+          <strong class="status-badge">{{ order.status === 1 ? 'Opłacone' : 'Oczekujące' }}</strong>
+        </div>
+      </div>
+    }
+
+    <div class="actions">
+      <a routerLink="/orders" class="btn-primary">Moje zamówienia</a>
+      <a routerLink="/products" class="btn-secondary">Kontynuuj zakupy</a>
+    </div>
+
+  </div>
+</div>

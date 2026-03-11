@@ -64,7 +64,7 @@ export class OrdersComponent implements OnInit {
   }
 
   cancelOrder(orderId: number): void {
-    if (confirm('Czy na pewno chcesz anulować to zamówienie?')) return;
+    if (!confirm('Czy na pewno chcesz anulować to zamówienie?')) return;
     this.orderService.cancelOrder(orderId).subscribe({
       next: () => this.loadOrders(),
       error: (err) => console.error('Błąd anulowania:', err)

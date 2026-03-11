@@ -29,11 +29,19 @@ services:
       - Jwt__Audience=EShopUsers
       - Stripe__SecretKey=${STRIPE_SECRET_KEY}
       - Stripe__WebhookSecret=${STRIPE_WEBHOOK_SECRET}
-      - Stripe__SuccessUrl=http://localhost:4200/orders
-      - Stripe__CancelUrl=http://localhost:4200/cart
+      - Stripe__SuccessUrl=http://localhost:4200/payment/success
+      - Stripe__CancelUrl=http://localhost:4200/payment/cancel
     depends_on:
       db:
         condition: service_healthy
+
+  stripe-cli:
+    image: stripe/stripe-cli
+    command: listen --forward-to http://backend:5238/api/payments/webhook --skip-verify
+    environment:
+      - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
+    depends_on:
+      - backend
 
   frontend:
     build:
