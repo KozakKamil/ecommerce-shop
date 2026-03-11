@@ -16,3 +16,8 @@ export interface Category {
   description: string;
   products?: Product[];
 }
+
+export interface ProductsPage {
+  items: Product[];
+  totalCount: number;
+}

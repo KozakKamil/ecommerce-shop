@@ -34,6 +34,8 @@ public class ProductsController : ControllerBase
         if (!string.IsNullOrWhiteSpace(search))
             query = query.Where(p => p.Name.Contains(search) || p.Description.Contains(search));
 
+        var totalCount = await query.CountAsync();
+
         var products = await query
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
@@ -56,7 +58,7 @@ public class ProductsController : ControllerBase
             })
             .ToListAsync();
 
-        return Ok(products);
+        return Ok(new { items = products, totalCount });
     }
 
     [HttpGet("{id}")]
