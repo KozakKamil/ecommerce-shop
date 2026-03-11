@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { CartService } from '../../services/cart';
 
@@ -14,7 +15,11 @@ export class ProductCardComponent {
   adding = false;
   added = false;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
+
+  goToDetail(): void {
+    this.router.navigate(['/products', this.product.id]);
+  }
 
   addToCart(): void {
     if (this.adding) return;
