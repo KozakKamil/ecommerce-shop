@@ -1,0 +1,20 @@
+name: Docker Build Check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  docker-build:
+    name: Sprawdź Docker Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout kodu
+        uses: actions/checkout@v4
+
+      - name: Build backend image
+        run: docker build -t eshop-backend ./backend
+
+      - name: Build frontend image
+        run: docker build -t eshop-frontend ./frontend/eshop-ui
