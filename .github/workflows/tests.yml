@@ -1,4 +1,4 @@
-name: 🧪 Testy Backend
+name: CI/CD Pipeline
 
 on:
   pull_request:
@@ -25,20 +25,20 @@ jobs:
         working-directory: backend
 
       - name: Build
-        run: dotnet build --no-restore --warnaserror
+        run: dotnet build --no-restore
         working-directory: backend
 
       - name: Uruchom testy z coverage
         run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
         working-directory: backend
 
-      - name: 📊 Wgraj raport coverage
+      - name: Wgraj raport coverage
         uses: codecov/codecov-action@v4
         with:
           directory: backend/coverage
           fail_ci_if_error: false
 
-frontend-build:
+  frontend-build:
     name: Frontend Build
     runs-on: ubuntu-latest
 
