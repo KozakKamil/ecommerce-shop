@@ -39,16 +39,16 @@ public class CategoriesControllerTests
     }
 
     [Fact]
-    public async Task GetCategories_EmptyDb_ReturnsEmptyList()
+    public async Task GetCategories_ReturnsOnlyExpectedCategories_NoExtras()
     {
-        var context = TestDbContextFactory.Create("CatDb_Empty");
-        var controller = new CategoriesController(context);
+        var context = TestDbContextFactory.Create("CatDb_NoExtras");
 
+        var controller = new CategoriesController(context);
         var result = await controller.GetCaregories();
 
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var categories = Assert.IsAssignableFrom<IEnumerable<Category>>(okResult.Value);
-        Assert.Empty(categories);
+        Assert.Equal(5, categories.Count());
     }
 
     [Fact]
