@@ -203,6 +203,6 @@ public class ProductsControllerTests
         Assert.Equal(3, totalCount); // totalCount = 3 mimo pageSize=1
 
         var items = value.GetType().GetProperty("items")!.GetValue(value) as System.Collections.IList;
-        Assert.Equal(1, items!.Count); // ale tylko 1 produkt na stronie
+        Assert.Single(items!);
     }
 }
