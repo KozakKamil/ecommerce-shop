@@ -133,4 +133,49 @@ public class OrderControllerTests
 
         Assert.IsType<NotFoundResult>(result);
     }
+
+    [Fact]
+    public async Task GetOrder_ValidId_ReturnsOk()
+    {
+        var context = TestDbContextFactory.Create("OrderDb_GetById");
+        var order = new Order { UserId = "user-1", TotalAmount = 100m, Status = OrderStatus.Pending, Items = new List<OrderItem>() };
+        context.Orders.Add(order);
+        await context.SaveChangesAsync();
+
+        var controller = new OrderController(context);
+        ControllerTestHelper.SetUser(controller, "user-1");
+
+        var result = await controller.GetOrder(order.Id);
+
+        Assert.IsType<OkObjectResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task GetOrder_InvalidId_ReturnsNotFound()
+    {
+        var context = TestDbContextFactory.Create("OrderDb_GetByIdNotFound");
+        var controller = new OrderController(context);
+        ControllerTestHelper.SetUser(controller, "user-1");
+
+        var result = await controller.GetOrder(999);
+
+        Assert.IsType<NotFoundObjectResult>(result.Result);
+}
+
+    [Fact]
+    public async Task GetOrder_OtherUsersOrder_ReturnsNotFound()
+    {
+        
+        var context = TestDbContextFactory.Create("OrderDb_OtherUser");
+        var order = new Order { UserId = "user-2", TotalAmount = 100m, Status = OrderStatus.Pending, Items = new List<OrderItem>() };
+        context.Orders.Add(order);
+        await context.SaveChangesAsync();
+
+        var controller = new OrderController(context);
+        ControllerTestHelper.SetUser(controller, "user-1");
+
+        var result = await controller.GetOrder(order.Id);
+
+        Assert.IsType<NotFoundObjectResult>(result.Result);
+    }
 }
