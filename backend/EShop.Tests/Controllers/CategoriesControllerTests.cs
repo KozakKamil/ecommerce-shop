@@ -22,7 +22,20 @@ public class CategoriesControllerTests
 
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var categories = Assert.IsAssignableFrom<IEnumerable<Category>>(okResult.Value);
-        Assert.Equal(2, categories.Count());
+        Assert.Equal(7, categories.Count());
+    }
+
+    [Fact]
+    public async Task GetCategories_ReturnsSeededCategories()
+    {
+        var context = TestDbContextFactory.Create("CatDb_Seeded");
+
+        var controller = new CategoriesController(context);
+        var result = await controller.GetCaregories();
+
+        var okResult = Assert.IsType<OkObjectResult>(result.Result);
+        var categories = Assert.IsAssignableFrom<IEnumerable<Category>>(okResult.Value);
+        Assert.Equal(5, categories.Count()); // 5 kategorii z seed data
     }
 
     [Fact]

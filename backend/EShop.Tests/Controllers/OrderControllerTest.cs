@@ -159,13 +159,12 @@ public class OrderControllerTests
 
         var result = await controller.GetOrder(999);
 
-        Assert.IsType<NotFoundObjectResult>(result.Result);
-}
+        Assert.IsType<NotFoundResult>(result.Result);
+    }
 
     [Fact]
     public async Task GetOrder_OtherUsersOrder_ReturnsNotFound()
     {
-        
         var context = TestDbContextFactory.Create("OrderDb_OtherUser");
         var order = new Order { UserId = "user-2", TotalAmount = 100m, Status = OrderStatus.Pending, Items = new List<OrderItem>() };
         context.Orders.Add(order);
@@ -176,6 +175,6 @@ public class OrderControllerTests
 
         var result = await controller.GetOrder(order.Id);
 
-        Assert.IsType<NotFoundObjectResult>(result.Result);
+        Assert.IsType<NotFoundResult>(result.Result);
     }
 }
