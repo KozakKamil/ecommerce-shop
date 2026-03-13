@@ -1,40 +1,103 @@
 <div class="product-detail-container">
-  @if(loading) {
+  @if(loading()) {
     <p class="status-msg">Ładowanie produktu...</p>
-  } @else if (notFound) {
+  } @else if (notFound()) {
     <div class="not-found">
       <p>😕 Nie znaleziono produktu.</p>
       <a routerLink="/products">← Wróć do listy</a>
     </div>
-  } @else if (product) {
+  } @else if (product()) {
     <a routerLink="/products" class="back-link">← Wróć do listy produktów</a>
     <div class="product-detail">
       <div class="product-image">
-        <img [src]="product.imageUrl || 'https://via.placeholder.com/500x400?text=Brak+zdjęcia'" [alt]="product.name"/>
+        <img [src]="product()!.imageUrl || 'https://via.placeholder.com/500x400?text=Brak+zdjęcia'" [alt]="product()!.name"/>
       </div>
       <div class="product-info">
-        @if (product.category){
-          <span class="badge">{{ product.category.name }}</span>
+        @if (product()!.category){
+          <span class="badge">{{ product()!.category!.name }}</span>
         }
-        <h1>{{ product.name }}</h1>
-        <p class="description">{{ product.description }}</p>
+        <h1>{{ product()!.name }}</h1>
+        <p class="description">{{ product()!.description }}</p>
 
         <div class="price-row">
-          <span class="price">{{ product.price | number:'1.2-2' }} zł</span>
-          <span class="stock" [class.low]="product.stock < 5" [class.out]="product.stock === 0">
-            @if(product.stock === 0){
+          <span class="price">{{ product()!.price | number:'1.2-2' }} zł</span>
+          <span class="stock" [class.low]="product()!.stock < 5" [class.out]="product()!.stock === 0">
+            @if(product()!.stock === 0){
               Brak w magazynie
-            } @else if (product.stock < 5){
-              ⚠️ Ostatnie {{ product.stock }} szt.
+            } @else if (product()!.stock < 5){
+              ⚠️ Ostatnie {{ product()!.stock }} szt.
             } @else{
-              ✅ Dostępnych: {{ product.stock }}
+              ✅ Dostępnych: {{ product()!.stock }}
             }
           </span>
         </div>
-        <button class="add-to-cart-btn" (click)="addToCart()" [disabled]="adding || product.stock === 0 || added" [class.added]="added">
-          {{ added ? '✅ Dodano do koszyka!' : adding ? '⏳ Dodawanie...' : '🛒 Dodaj do koszyka' }}
+        <button class="add-to-cart-btn" (click)="addToCart()" [disabled]="adding() || product()!.stock === 0 || added()" [class.added]="added()">
+          {{ added() ? '✅ Dodano do koszyka!' : adding() ? '⏳ Dodawanie...' : '🛒 Dodaj do koszyka' }}
         </button>
       </div>
+    </div>
+
+    <div class="reviews-section">
+      <h2>⭐ Opinie ({{ totalReviews() }})</h2>
+
+      @if (totalReviews() > 0) {
+        <div class="avg-rating">
+          <span class="stars">{{ getStars(Math.round(avgRating())) }}</span>
+          <span class="avg-number">{{ avgRating() | number:'1.1-1' }} / 5</span>
+        </div>
+      }
+
+      @if (isLoggedIn) {
+        <div class="review-form">
+          <h3>Dodaj opinię</h3>
+          @if (reviewError) {
+            <p class="error">{{ reviewError }}</p>
+          }
+          <div class="rating-select">
+            <label>Ocena:</label>
+            <div class="stars-input">
+              @for (star of [1,2,3,4,5]; track star) {
+                <span
+                  class="star"
+                  [class.active]="star <= newRating"
+                  (click)="newRating = star"
+                >★</span>
+              }
+            </div>
+          </div>
+          <textarea
+            [(ngModel)]="newComment"
+            placeholder="Napisz swoją opinię..."
+            rows="3"
+          ></textarea>
+          <button class="submit-btn" (click)="submitReview()" [disabled]="submittingReview || !newComment.trim()">
+            {{ submittingReview ? 'Wysyłanie...' : 'Dodaj opinię' }}
+          </button>
+        </div>
+      } @else {
+        <p class="login-prompt">
+          <a routerLink="/login">Zaloguj się</a>, żeby dodać opinię.
+        </p>
+      }
+
+      @if (loadingReviews()) {
+        <p>Ładowanie opinii...</p>
+      } @else if (reviews().length === 0) {
+        <p class="no-reviews">Brak opinii. Bądź pierwszy!</p>
+      } @else {
+        <div class="reviews-list">
+          @for (review of reviews(); track review.id) {
+            <div class="review-card">
+              <div class="review-header">
+                <span class="review-stars">{{ getStars(review.rating) }}</span>
+                <span class="review-author">{{ review.userName }}</span>
+                <span class="review-date">{{ review.createdAt | date:'dd.MM.yyyy' }}</span>
+              </div>
+              <p class="review-comment">{{ review.comment }}</p>
+            </div>
+          }
+        </div>
+      }
     </div>
   }
 </div>
