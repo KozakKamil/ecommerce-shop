@@ -146,3 +146,14 @@
     background: #4caf50;
   }
 }
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  .stars { color: #f5a623; }
+  .avg { color: #333; font-weight: 600;}
+  .count { color: #888; }
+  .no-rating { color: #bbb; }
+}

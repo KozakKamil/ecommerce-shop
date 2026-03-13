@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product, Category, ProductsPage } from '../models/product.model';
+import { Review, ReviewsResponse } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,17 @@ export class ProductService {
 
   getCategory(id: number): Observable<Category> {
     return this.http.get<Category>(`${this.apiUrl}/categories/${id}`);
+  }
+
+  getReviews(productId: number): Observable<ReviewsResponse> {
+    return this.http.get<ReviewsResponse>(`${this.apiUrl}/products/${productId}/reviews`);
+  }
+
+  addReview(productId: number, rating: number, comment: string): Observable<Review> {
+    return this.http.post<Review>(`${this.apiUrl}/products/${productId}/reviews`, { rating, comment });
+  }
+
+  deleteReview(productId: number, reviewId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/products/${productId}/reviews/${reviewId}`);
   }
 }

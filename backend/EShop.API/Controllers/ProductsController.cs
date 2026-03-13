@@ -54,7 +54,9 @@ public class ProductsController : ControllerBase
                     p.Category.Id,
                     p.Category.Name,
                     p.Category.Description
-                }
+                },
+                AvgRating = p.Reviews.Any() ? Math.Round(p.Reviews.Average(r => r.Rating), 1) : 0.0,
+                TotalReviews = p.Reviews.Count()
             })
             .ToListAsync();
 
@@ -66,6 +68,7 @@ public class ProductsController : ControllerBase
     {
         var product = await _context.Products
             .Include(p => p.Category)
+            .Include(p => p.Reviews)
             .Where(p => p.Id == id)
             .Select(p => new
             {

@@ -15,6 +15,7 @@ public class AppDbContext : IdentityDbContext<AppUser>
     public DbSet<CartItem> CartItems => Set<CartItem>();
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+    public DbSet<Review> Reviews => Set<Review>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -36,6 +37,12 @@ public class AppDbContext : IdentityDbContext<AppUser>
         modelBuilder.Entity<Order>(entity =>
         {
            entity.Property(o => o.TotalAmount).HasColumnType("decimal(18,2)");
+        });
+
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.HasOne(r => r.Product).WithMany(p => p.Reviews).HasForeignKey(r => r.ProductId);
+            entity.HasOne(r => r.User).WithMany().HasForeignKey(r => r.UserId);
         });
 
         modelBuilder.Entity<Category>().HasData(
