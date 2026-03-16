@@ -38,7 +38,7 @@ public class AuthController : ControllerBase
         var result = await _userManager.CreateAsync(user, dto.Password);
 
         if (!result.Succeeded)
-            return BadRequest(result.Errors);
+            return BadRequest(new { message = "Nieprawidłowe dane rejestracyjne", errors = result.Errors });
 
         if(!await _roleManager.RoleExistsAsync("User"))
             await _roleManager.CreateAsync(new IdentityRole("User"));
@@ -51,11 +51,11 @@ public class AuthController : ControllerBase
     {
         var user = await _userManager.FindByEmailAsync(dto.Email);
         if (user == null)
-            return Unauthorized("Nieprawidłowy email lub hasło");
+            return Unauthorized(new { message = "Nieprawidłowy email lub hasło" });
 
         var validPassword = await _userManager.CheckPasswordAsync(user, dto.Password);
         if (!validPassword)
-            return Unauthorized("Nieprawidłowy email lub hasło");
+            return Unauthorized(new { message = "Nieprawidłowy email lub hasło" });
 
         return Ok(await GenerateTokenAsync(user));
     }

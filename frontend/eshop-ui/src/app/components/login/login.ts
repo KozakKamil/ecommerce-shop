@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -13,22 +13,22 @@ import { LoginDto } from '../../models/auth.model';
 })
 export class LoginComponent {
   loginDto: LoginDto = { email: '', password: '' };
-  error = '';
-  loading = false;
+  error = signal('');
+  loading = signal(false);
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    this.loading = true;
-    this.error = '';
+    this.loading.set(true);
+    this.error.set('');
 
     this.authService.login(this.loginDto).subscribe({
       next: () => {
         this.router.navigate(['/products']);
       },
       error: (err) => {
-        this.error = err.error?.message || 'Nieprawidłowy email lub hasło';
-        this.loading = false;
+        this.error.set(err.error?.message || 'Nieprawidłowy email lub hasło');
+        this.loading.set(false);
       }
     });
   }

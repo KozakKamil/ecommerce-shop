@@ -2,8 +2,8 @@
   <div class="auth-card">
     <h2>🔐 Logowanie</h2>
 
-    @if (error) {
-      <div class="error-message">{{ error }}</div>
+    @if (error()) {
+       <div class="error-message">{{ error() }}</div>
     }
 
     <form (ngSubmit)="onSubmit()">
@@ -31,8 +31,8 @@
         />
       </div>
 
-      <button type="submit" [disabled]="loading" class="btn-primary">
-        {{ loading ? 'Logowanie...' : 'Zaloguj się' }}
+      <button type="submit" [disabled]="loading()" class="btn-primary">
+        {{ loading() ? 'Logowanie...' : 'Zaloguj się' }}
       </button>
     </form>
 

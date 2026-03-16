@@ -61,4 +61,16 @@ export class AuthService {
     const userJson = localStorage.getItem('user');
     return userJson ? JSON.parse(userJson) : null;
   }
+
+  getProfile(): Observable<{ firstName: string; lastName: string; email: string}> {
+    return this.http.get<{ firstName: string; lastName: string; email: string}>(`${this.apiUrl}/profile`);
+  }
+
+  updateName(firstName: string, lastName: string): Observable<any> {
+    return this.http.put(`/api/profile/name`, { firstName, lastName });
+  }
+
+  changePassword(currentPassword: string, newPassword: string): Observable<any> {
+    return this.http.put(`/api/profile/password`, { currentPassword, newPassword });
+  }
 }
