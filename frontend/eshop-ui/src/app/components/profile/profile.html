@@ -1,0 +1,53 @@
+<div class="profile-container">
+  <h1>👤 Mój profil</h1>
+
+  <div class="profile-card">
+    <h2>Dane osobowe</h2>
+    @if (nameSuccess()) {
+      <p class="success">✅ {{ nameSuccess() }}</p>
+    }
+    @if (nameError()) {
+      <p class="error">❌ {{ nameError() }}</p>
+    }
+    <div class="form-group">
+      <label>Imię</label>
+      <input type="text" [value]="firstName()" (input)="firstName.set($any($event.target).value)" />
+    </div>
+    <div class="form-group">
+      <label>Nazwisko</label>
+      <input type="text" [value]="lastName()" (input)="lastName.set($any($event.target).value)" />
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" [value]="email()" disabled />
+    </div>
+    <button class="save-btn" (click)="saveName()" [disabled]="savingName()">
+      {{ savingName() ? 'Zapisywanie...' : 'Zapisz zmiany' }}
+    </button>
+  </div>
+
+  <div class="profile-card">
+    <h2>Zmiana hasła</h2>
+    @if (passwordSuccess()) {
+      <p class="success">✅ {{ passwordSuccess() }}</p>
+    }
+    @if (passwordError()) {
+      <p class="error">❌ {{ passwordError() }}</p>
+    }
+    <div class="form-group">
+      <label>Obecne hasło</label>
+      <input type="password" [(ngModel)]="currentPassword" />
+    </div>
+    <div class="form-group">
+      <label>Nowe hasło</label>
+      <input type="password" [(ngModel)]="newPassword" />
+    </div>
+    <div class="form-group">
+      <label>Powtórz nowe hasło</label>
+      <input type="password" [(ngModel)]="confirmPassword" />
+    </div>
+    <button class="save-btn" (click)="changePassword()" [disabled]="savingPassword() || !currentPassword || !newPassword || !confirmPassword">
+      {{ savingPassword() ? 'Zmienianie...' : 'Zmień hasło' }}
+    </button>
+  </div>
+</div>

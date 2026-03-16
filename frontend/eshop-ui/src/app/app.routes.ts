@@ -12,6 +12,7 @@ import { PaymentSuccessComponent } from './components/payment-success/payment-su
 import { PaymentCancelComponent } from './components/payment-cancel/payment-cancel';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
+import { ProfileComponent } from './components/profile/profile';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -24,6 +25,7 @@ export const routes: Routes = [
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [adminGuard] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [adminGuard] },
   { path: 'payment/success', component: PaymentSuccessComponent, canActivate: [authGuard] },
-{ path: 'payment/cancel', component: PaymentCancelComponent, canActivate: [authGuard] },
+  { path: 'payment/cancel', component: PaymentCancelComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'products/:id', component: ProductDetailComponent }
 ];

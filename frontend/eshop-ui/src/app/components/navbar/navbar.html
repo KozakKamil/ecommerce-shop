@@ -25,7 +25,7 @@
         </li>
       }
       <li class="user-info">
-        <span class="user-name">👤 {{ user.firstName }}</span>
+        <a routerLink="/profile" routerLinkActive="active" class="user-name">👤 {{ user.firstName }}</a>
         <a (click)="logout()" class="logout-link">Wyloguj</a>
       </li>
     } @else {
