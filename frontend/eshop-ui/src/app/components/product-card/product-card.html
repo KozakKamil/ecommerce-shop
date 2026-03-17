@@ -2,7 +2,7 @@
   <div class="product-link" (click)="goToDetail()">
     <div class="product-image">
       <img
-        [src]="product.imageUrl || 'https://via.placeholder.com/300x200?text=Brak+zdjęcia'"
+        [src]="product.imageUrl || '/assets/no-image.svg'"
         [alt]="product.name"
       />
     </div>

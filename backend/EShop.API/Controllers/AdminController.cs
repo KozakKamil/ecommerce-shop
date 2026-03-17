@@ -129,4 +129,43 @@ public class AdminController : ControllerBase
         
         return NoContent();
     }
+
+    [HttpPost("products/{id}/image")]
+    public async Task<ActionResult> UploadImage(int id,[FromForm] IFormFile file)
+    {
+        if(file == null || file.Length == 0)
+            return BadRequest(new { message = "Brak pliku" });
+
+        var allowed = new[] {".jpg", ".jpeg", ".png", ".webp"};
+        var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+        if(!allowed.Contains(ext))
+            return BadRequest(new { message = "Nieobsługiwany format pliku" });
+
+        if(file.Length > 5 * 1024 * 1024)
+            return BadRequest(new { message = "Plik jest zbyt duży (max 5MB)" });
+
+        var product = await _context.Products.FindAsync(id);
+        if(product == null) return NotFound();
+
+        var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "products");
+        Directory.CreateDirectory(uploadsDir);
+
+        var fileName = $"{id}_{Guid.NewGuid():N}{ext}";
+        var filePath = Path.Combine(uploadsDir, fileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+            await file.CopyToAsync(stream);
+
+        if(!string.IsNullOrEmpty(product.ImageUrl) && product.ImageUrl.StartsWith("/images/"))
+        {
+            var oldPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", product.ImageUrl.TrimStart('/'));
+            if(System.IO.File.Exists(oldPath))
+                System.IO.File.Delete(oldPath);
+        }
+
+        product.ImageUrl = $"/images/products/{fileName}";
+        await _context.SaveChangesAsync();
+
+        return Ok(new { imageUrl = product.ImageUrl });
+    }
 }

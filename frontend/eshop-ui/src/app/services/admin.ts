@@ -54,4 +54,10 @@ export class AdminService {
   updateOrderStatus(id: number, status: number): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/orders/${id}/status`, { status });
   }
+
+  uploadProductImage(productId: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<{ imageUrl: string}>(`${this.apiUrl}/products/${productId}/image`, formData);
+  }
 }

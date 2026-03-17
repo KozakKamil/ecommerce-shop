@@ -157,3 +157,28 @@
 {
   transform: scale(1.2);
 }
+
+.image-preview{
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.file-input{
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.upload-error {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.url-input{
+  width: 100%;
+  margin-top: 0.25rem;
+}
