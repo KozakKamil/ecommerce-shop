@@ -107,6 +107,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAngular");
+var wwwrootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+Directory.CreateDirectory(wwwrootPath);
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(wwwrootPath),
+    RequestPath = ""
+});
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -34,6 +34,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - product_images:/app/wwwroot/images/products
 
   stripe-cli:
     image: stripe/stripe-cli
@@ -54,3 +56,4 @@ services:
 
 volumes:
   pgdata:
+  product_images:

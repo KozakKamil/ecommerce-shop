@@ -32,8 +32,17 @@
           </select>
         </div>
         <div class="form-group full">
-          <label>URL obrazka</label>
-          <input [(ngModel)]="form.imageUrl" placeholder="https://..." />
+          <label>Zdjęcie produktu</label>
+          @if (imagePreview || form.imageUrl){
+            <img [src] = "imagePreview || form.imageUrl" class = "image-preview" alt="Podgląd"/>
+          }
+          <input type="file" accept="image/jpeg,image/png,image/webp" (change)="onFileSelected($event)" class="file-input"/>
+          @if (uploadError) {
+            <p class="upload-error">{{ uploadError }}</p>
+          }
+          @if (!selectedFile){
+            <input [(ngModel)]="form.imageUrl" placeholder="lub wpisz URL obrazka..." class="url-input"/>
+          }
         </div>
         <div class="form-group full">
           <label>Opis</label>
